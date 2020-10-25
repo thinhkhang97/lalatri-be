@@ -3,7 +3,7 @@ import { ProductController } from "../controllers/product-controller";
 import { BaseRoute } from "./base-route";
 
 export class ProductRoute extends BaseRoute<ProductController> {
-	controller: ProductController;
+	protected controller: ProductController;
 
 	constructor(router: Router) {
 		super(router);

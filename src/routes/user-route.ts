@@ -3,7 +3,7 @@ import { UserController } from "../controllers";
 import { BaseRoute } from "./base-route";
 
 export class UserRoute extends BaseRoute<UserController> {
-	controller: UserController;
+	protected controller: UserController;
 
 	constructor(router: Router) {
 		super(router);

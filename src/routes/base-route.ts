@@ -1,9 +1,9 @@
 import { Router } from "express";
 
 export class BaseRoute<Controller> {
-	router: Router;
+	protected router: Router;
 
-	controller?: Controller;
+	protected controller?: Controller;
 
 	constructor(router: Router) {
 		this.router = router;
