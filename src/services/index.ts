@@ -1,3 +1,3 @@
-import { sqlService } from "./sql-service";
+import { UserService } from "./user-service";
 
-export { sqlService };
+export const userService = new UserService();
