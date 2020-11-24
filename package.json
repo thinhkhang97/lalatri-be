@@ -5,8 +5,7 @@
 	"main": "index.ts",
 	"scripts": {
 		"start": "ts-node .",
-		"migrate": "ts-node src/database/migrations/authentication.ts",
-		"migrate:create": "db-migrate create --name -m ./src/database/migrations",
+		"migrate:create": "db-migrate create ",
 		"migrate:up": "db-migrate up"
 	},
 	"author": "Khang Thinh Nguyen",
