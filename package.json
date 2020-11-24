@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "ts-node .",
 		"migrate:create": "db-migrate create ",
-		"migrate:up": "db-migrate up"
+		"migrate:up": "db-migrate up",
+		"migrate:down": "db-migrate down"
 	},
 	"author": "Khang Thinh Nguyen",
 	"license": "ISC",
