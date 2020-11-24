@@ -1,3 +1,3 @@
-import { Database } from "./database";
+import { database } from "./database";
 
-export { Database };
+export { database };

@@ -1,7 +1,7 @@
-import { Client } from "pg";
+import { Client, Pool, QueryResult } from "pg";
 import { databaseConfig } from "../config";
 
-export class Database {
+class Database {
   private client: Client;
 
   constructor() {
@@ -18,4 +18,18 @@ export class Database {
       console.log("Connected to database");
     });
   }
+
+  async query(queryString: string, params?: any): Promise<QueryResult<any>> {
+    const start = Date.now();
+    const res = await this.client.query(queryString, params);
+    const duration = Date.now() - start;
+    console.log("executed query", {
+      queryString,
+      duration,
+      rows: res.rowCount,
+    });
+    return res;
+  }
 }
+
+export const database = new Database();
