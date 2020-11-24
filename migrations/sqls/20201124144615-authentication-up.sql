@@ -13,8 +13,8 @@ CREATE TABLE public. "user" (
 	phone character varying(255) COLLATE pg_catalog. "default",
 	salt character varying(255) COLLATE pg_catalog. "default" NOT NULL,
 	hashed_password character varying(512) COLLATE pg_catalog. "default" NOT NULL,
-	created_date timestamp with time zone NOT NULL,
-	modified_date timestamp with time zone NOT NULL,
+	created_date timestamp with time zone NOT NULL DEFAULT now(),
+	modified_date timestamp with time zone NOT NULL DEFAULT now(),
 	CONSTRAINT user_pkey PRIMARY KEY (id))
 TABLESPACE pg_default;
 
