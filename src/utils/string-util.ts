@@ -20,6 +20,10 @@ export class StringUtil {
     return this.EmailRegExp.test(str);
   }
 
+  /**
+   * Return salt and hashed password after encrypting password
+   * @param password
+   */
   static encryptPassword(
     password: string
   ): { salt: string; hashedPassword: string } {
@@ -28,5 +32,22 @@ export class StringUtil {
       .pbkdf2Sync(password, salt, 1000, 512, "sha512")
       .toString("hex");
     return { salt, hashedPassword };
+  }
+
+  /**
+   * Encrypt and compare passwords
+   * @param password password to compare
+   * @param salt A string to encrypt old password
+   * @param hashedPwd old hashed password
+   */
+  static validatePassword(
+    password: string,
+    salt: string,
+    hashedPwd: string
+  ): boolean {
+    const hashedCurrentPwd = cryto
+      .pbkdf2Sync(password, salt, 1000, 512, "sha512")
+      .toString("hex");
+    return hashedCurrentPwd === hashedPwd;
   }
 }

@@ -22,20 +22,18 @@ class Database {
   async query(
     queryString: string,
     params?: any
-  ): Promise<QueryResult<any> | undefined> {
+  ): Promise<QueryResult<any> | { rows: any[] }> {
     try {
       const start = Date.now();
       const res = await this.client.query(queryString, params);
       const duration = Date.now() - start;
-      console.log("executed query", {
-        queryString,
-        duration,
-        rows: res.rowCount,
-      });
+      if (res.rowCount === 0) {
+        res.rows = [{}];
+      }
       return res;
     } catch (error) {
       console.log(error);
-      return;
+      return { rows: [{}] };
     }
   }
 }

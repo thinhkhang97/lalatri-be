@@ -1,4 +1,5 @@
 import { UserConfig } from "../config";
+import { IUser } from "../models";
 import { userRespository } from "../respository";
 import { StringUtil } from "../utils";
 
@@ -7,15 +8,15 @@ export class UserService {
     return pass.trim().length >= UserConfig.validPasswordLength;
   }
 
-  async createUser(input: { email: string; password: string }): Promise<void> {
+  async createUser(input: { email: string; password: string }): Promise<IUser> {
     const { email, password } = input;
     /**
      * Check valid email format and password format
      */
-
     if (!StringUtil.isEmail(email) || !this.validatePassword(password)) {
       throw new Error("Invailid input");
     }
+
     /**
      * Check exist email to restore password
      */
@@ -29,6 +30,9 @@ export class UserService {
       salt,
       hashedPassword
     );
+    if (!createdUser) {
+      throw new Error("Couldnt create user");
+    }
     return createdUser;
   }
 }
