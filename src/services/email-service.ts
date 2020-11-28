@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { EmailConfig } from "../config";
+import { activateAccount } from "./email-templates/activate-account";
 export class EmailService {
 	transporter: Mail;
 
@@ -17,9 +18,9 @@ export class EmailService {
 	): Promise<void> {
 		const mailOptions = {
 			from: "khangtnguyen97@gmail.com",
-			to: "thinhkhang97@gmail.com",
+			to: email,
 			subject: "Lalatri-Link kích hoạt tài khoản",
-			text: "That was easy!",
+			html: activateAccount(activeLink),
 		};
 		this.transporter.sendMail(mailOptions, function (error, info) {
 			if (error) {
