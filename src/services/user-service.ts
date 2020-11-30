@@ -1,5 +1,5 @@
 import { emailService } from ".";
-import { UserConfig } from "../config";
+import { AppConfig, EmailConfig, UserConfig } from "../config";
 import { IUser } from "../models";
 import { userRespository } from "../respository";
 import { StringUtil } from "../utils";
@@ -7,6 +7,16 @@ import { StringUtil } from "../utils";
 export class UserService {
 	private validatePassword(pass: string): boolean {
 		return pass.trim().length >= UserConfig.validPasswordLength;
+	}
+
+	buildActivateRegisterLink(user: IUser): string {
+		const { email } = user;
+		const token = StringUtil.signData({ email }, EmailConfig.secretKey);
+		console.log(
+			"built activated link",
+			`${AppConfig.host}/user/activate/${token}`
+		);
+		return `${AppConfig.host}/user/activate/${token}`;
 	}
 
 	async createUser(input: { email: string; password: string }): Promise<IUser> {
@@ -38,7 +48,8 @@ export class UserService {
 		/**
 		 * Send email
 		 */
-		emailService.sendActivateAccountLink(email, "www.google.com");
+		const activatedLink = this.buildActivateRegisterLink(createdUser);
+		emailService.sendActivateAccountLink(email, activatedLink);
 		return createdUser;
 	}
 }
