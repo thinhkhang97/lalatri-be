@@ -52,4 +52,18 @@ export class UserService {
 		emailService.sendActivateAccountLink(email, activatedLink);
 		return createdUser;
 	}
+
+	async activateAccount(tid: string): Promise<any> {
+		try {
+			const decoded = StringUtil.decoded(tid, EmailConfig.secretKey);
+			const email = decoded.email || "";
+			const existUser = await userRespository.getUserByEmail(email);
+			if (!existUser) {
+				throw new Error("Not found user");
+			}
+			await userRespository.updateActivedStatusById(existUser.id, true);
+		} catch {
+			throw new Error("Could not activate account");
+		}
+	}
 }

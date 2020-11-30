@@ -6,3 +6,9 @@ export const CREATE_USER_QUERY = `
 export const GET_USER_QUERY = `
   select * from public."user" as u where u.email = $1 
 `;
+
+export const UPDATE_USER_ACTIVE_QUERY = `
+  update public."user"
+  set activate = $1
+  where id = $2
+`;

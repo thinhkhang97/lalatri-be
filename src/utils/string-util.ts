@@ -60,4 +60,8 @@ export class StringUtil {
 	static signData(encryptData: any, privateKey: string): string {
 		return jwt.sign({ data: JSON.stringify(encryptData) }, privateKey);
 	}
+
+	static decoded(token: string, privateKey: string): any {
+		return jwt.verify(token, privateKey);
+	}
 }
