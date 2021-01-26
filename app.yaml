@@ -1,0 +1,11 @@
+runtime: nodejs14
+
+env_variables:
+  PGHOST: "localhost"
+  PGUSER: "postgres"
+  PGDATABASE: "lalatri"
+  PGPASSWORD: "123456"
+  PGPORT: 5432
+  DISABLE_SEND_EMAIL: true
+  USER_EMAIL: "khangtnguyen97"
+  EMAIL_PASSWORD: "myp@ss123456"
